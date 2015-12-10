@@ -1,0 +1,1 @@
+cmd_/home/sivax/git/driver/hello-3/hello-3.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/sivax/git/driver/hello-3/hello-3.ko /home/sivax/git/driver/hello-3/hello-3.o /home/sivax/git/driver/hello-3/hello-3.mod.o
