@@ -1,0 +1,1 @@
+cmd_/home/sivax/git/driver/Modules-files/startstop.o := ld -m elf_x86_64   -r -o /home/sivax/git/driver/Modules-files/startstop.o /home/sivax/git/driver/Modules-files/start.o /home/sivax/git/driver/Modules-files/stop.o 

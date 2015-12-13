@@ -1,0 +1,1 @@
+cmd_/home/sivax/git/driver/Modules-files/startstop.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/sivax/git/driver/Modules-files/startstop.ko /home/sivax/git/driver/Modules-files/startstop.o /home/sivax/git/driver/Modules-files/startstop.mod.o
