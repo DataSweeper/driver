@@ -1,0 +1,1 @@
+cmd_/home/sivax/git/driver/char-drivers/hello-2/hello-2.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/sivax/git/driver/char-drivers/hello-2/hello-2.ko /home/sivax/git/driver/char-drivers/hello-2/hello-2.o /home/sivax/git/driver/char-drivers/hello-2/hello-2.mod.o
