@@ -156,7 +156,8 @@ static int wl_set_radio_block(void *data, bool blocked);
 static void wl_report_radio_state(wl_info_t *wl);
 #endif
 
-MODULE_LICENSE("MIXED/Proprietary");
+//MODULE_LICENSE("MIXED/Proprietary");
+MODULE_LICENSE("GPL");
 
 static struct pci_device_id wl_id_table[] =
 {
@@ -457,9 +458,9 @@ static const struct net_device_ops wl_netdev_monitor_ops =
 };
 #endif 
 
-static void
-wl_if_setup(struct net_device *dev)
+static void wl_if_setup(struct net_device *dev)
 {
+	printk(KERN_INFO "fun: wl_if_setup been called.");
 #if defined(WL_USE_NETDEV_OPS)
 	dev->netdev_ops = &wl_netdev_ops;
 #else
@@ -486,10 +487,11 @@ wl_if_setup(struct net_device *dev)
 #endif
 }
 
-static wl_info_t *
-wl_attach(uint16 vendor, uint16 device, ulong regs,
+static wl_info_t* wl_attach(uint16 vendor, uint16 device, ulong regs,
 	uint bustype, void *btparam, uint irq, uchar* bar1_addr, uint32 bar1_size)
 {
+
+	printk(KERN_INFO "fun: wl_attach been called.");
 	struct net_device *dev;
 	wl_if_t *wlif;
 	wl_info_t *wl;
@@ -503,11 +505,13 @@ wl_attach(uint16 vendor, uint16 device, ulong regs,
 	err = 0;
 
 	if (unit < 0) {
+		printk(KERN_INFO "if unit < 0");
 		WL_ERROR(("wl%d: unit number overflow, exiting\n", unit));
 		return NULL;
 	}
 
 	if (oneonly && (unit != instance_base)) {
+		printk(KERN_INFO "inside if oneonely.");
 		WL_ERROR(("wl%d: wl_attach: oneonly is set, exiting\n", unit));
 		return NULL;
 	}
@@ -738,8 +742,7 @@ fail:
 
 static void __devexit wl_remove(struct pci_dev *pdev);
 
-int __devinit
-wl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+int __devinit wl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
 	int rc;
 	wl_info_t *wl;
@@ -747,6 +750,7 @@ wl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	uint32 bar1_size = 0;
 	void* bar1_addr = NULL;
 
+	printk(KERN_INFO "fun: wl_pci_prob been called.");
 	WL_TRACE(("%s: bus %d slot %d func %d irq %d\n", __FUNCTION__,
 		pdev->bus->number, PCI_SLOT(pdev->devfn), PCI_FUNC(pdev->devfn), pdev->irq));
 
@@ -893,12 +897,13 @@ static struct pci_driver wl_pci_driver __refdata = {
 #endif 
 };
 
-static int __init
-wl_module_init(void)
+static int __init wl_module_init(void)
 {
+	printk(KERN_INFO "Initializing wl module.");
 	int error = -ENODEV;
 
 #ifdef BCMDBG
+	printk(KERN_INFO "Inside BCMDBG");
 	if (msglevel != 0xdeadbeef)
 		wl_msg_level = msglevel;
 	else {
@@ -953,8 +958,10 @@ wl_module_init(void)
 #endif
 	}
 
-	if (!(error = pci_module_init(&wl_pci_driver)))
+	if (!(error = pci_module_init(&wl_pci_driver))) {
+		printk(KERN_INFO "inside if pci module initialized.");
 		return (0);
+	}
 
 	return (error);
 }

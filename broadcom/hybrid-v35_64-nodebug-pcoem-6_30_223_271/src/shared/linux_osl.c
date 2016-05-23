@@ -135,9 +135,10 @@ osl_error(int bcmerror)
 
 extern uint8* dhd_os_prealloc(void *osh, int section, int size);
 
-osl_t *
-osl_attach(void *pdev, uint bustype, bool pkttag)
+osl_t* osl_attach(void *pdev, uint bustype, bool pkttag)
 {
+
+	printk(KERN_INFO "fun: osl_attach been called.");
 	osl_t *osh;
 
 	osh = kmalloc(sizeof(osl_t), GFP_ATOMIC);
@@ -160,6 +161,7 @@ osl_attach(void *pdev, uint bustype, bool pkttag)
 		case PCI_BUS:
 		case SI_BUS:
 		case PCMCIA_BUS:
+			printk(KERN_INFO ":) bus pci si pcmcia.");
 			osh->pub.mmbus = TRUE;
 			break;
 		case JTAG_BUS:
@@ -167,6 +169,7 @@ osl_attach(void *pdev, uint bustype, bool pkttag)
 		case USB_BUS:
 		case SPI_BUS:
 		case RPC_BUS:
+			printk(KERN_INFO ":) bus jtag sdio spi rpc.");
 			osh->pub.mmbus = FALSE;
 			break;
 		default:
