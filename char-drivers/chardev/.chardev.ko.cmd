@@ -1,0 +1,1 @@
+cmd_/home/sivax/git/driver/char-drivers/chardev/chardev.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/sivax/git/driver/char-drivers/chardev/chardev.ko /home/sivax/git/driver/char-drivers/chardev/chardev.o /home/sivax/git/driver/char-drivers/chardev/chardev.mod.o
